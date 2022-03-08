@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/components/message_bubble.dart';
 import 'package:flutter/material.dart';
 
@@ -20,20 +21,16 @@ class Messages extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         }
-        if (!snapshot.hasData) {
-          return const Center(
-            child: Text(
-              'No Messages!',
-            ),
-          );
-        }
         final docs = snapshot.data!.docs;
         return ListView.builder(
           reverse: true,
           itemCount: docs.length,
           itemBuilder: (context, index) {
             return MessageBubble(
+              isMe:
+                  docs[index]['uid'] == FirebaseAuth.instance.currentUser!.uid,
               mess: docs[index]['text'],
+              name: docs[index]['name'],
             );
           },
         );

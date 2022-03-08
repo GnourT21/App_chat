@@ -59,7 +59,9 @@ class _AuthFormState extends State<AuthForm> {
                         }
                         return null;
                       },
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        authPro.displayName(value);
+                      },
                       keyboardType: TextInputType.emailAddress,
                       decoration: kTextFieldDecoration.copyWith(
                         hintText: 'Enter your Username',

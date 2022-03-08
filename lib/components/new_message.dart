@@ -1,4 +1,4 @@
-import 'package:flash_chat/provider/messages.dart';
+import 'package:flash_chat/provider/messenger_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

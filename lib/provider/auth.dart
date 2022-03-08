@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/chat_page.dart';
 
 class AutheProvider with ChangeNotifier {
+  String _displayName = '';
   String _email = '';
   String _password = '';
   bool _isLogin = true;
@@ -14,6 +16,11 @@ class AutheProvider with ChangeNotifier {
 
   void toggleSignInBtn() {
     _isLogin = !_isLogin;
+    notifyListeners();
+  }
+
+  void displayName(String name) {
+    _displayName = name;
     notifyListeners();
   }
 

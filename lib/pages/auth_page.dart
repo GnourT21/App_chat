@@ -1,9 +1,9 @@
-import 'package:flash_chat/provider/authenticate_provider.dart';
+import 'package:flash_chat/provider/auth.dart';
 import 'package:flash_chat/ultilities/constrains.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/auth_form.dart';
+import '../components/auth_form.dart';
 
 class AuthScreen extends StatelessWidget {
   static const String route = '/auth-screen';

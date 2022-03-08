@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flash_chat/pages/chat_page.dart';
 import 'package:flash_chat/provider/auth.dart';
-import 'package:flash_chat/provider/messages.dart';
+import 'package:flash_chat/provider/messenger_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.orange,
             scaffoldBackgroundColor: const Color(0xffF5F5F5),
           ),
-          initialRoute: ChatPage.route,
+          initialRoute: AuthScreen.route,
           routes: {
             ChatPage.route: (context) => const ChatPage(),
             AuthScreen.route: (context) => const AuthScreen(),
