@@ -1,10 +1,10 @@
-import 'package:flash_chat/provider/authenticate_provider.dart';
+import 'package:flash_chat/provider/auth.dart';
 import 'package:flash_chat/ultilities/constrains.dart';
 import 'package:flash_chat/widgets/gradient_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'my_btn.dart';
+import '../widgets/my_btn.dart';
 
 class AuthForm extends StatefulWidget {
   const AuthForm({
