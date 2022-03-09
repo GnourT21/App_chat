@@ -1,13 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flash_chat/ultilities/constrains.dart';
 import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
   const MessageBubble(
-      {Key? key, required this.mess, required this.name, required this.isMe})
+      {Key? key,
+      required this.mess,
+      required this.name,
+      required this.isMe,
+      required this.userID})
       : super(key: key);
+
   final String mess;
   final String name;
+  final String userID;
   final bool isMe;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -20,14 +28,26 @@ class MessageBubble extends StatelessWidget {
               Container(
                 margin:
                     const EdgeInsets.only(left: 16.0, bottom: 6.0, right: 16.0),
-                child: Text(
-                  name.isEmpty ? 'Empty' : name,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black26,
-                  ),
-                ),
+                child: FutureBuilder(
+                    future: FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(userID)
+                        .get(),
+                    builder: (ctx, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return Text(
+                        snapshot.data['username'],
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black26,
+                        ),
+                      );
+                    }),
               ),
               Container(
                 margin: const EdgeInsets.only(
@@ -43,9 +63,6 @@ class MessageBubble extends StatelessWidget {
                 ),
                 child: Text(
                   mess,
-                  // style: TextStyle(
-                  //   color: isMe ? Colors.white : Colors.black,
-                  // ),
                 ),
               ),
             ],

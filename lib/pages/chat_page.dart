@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/components/new_message.dart';
-import 'package:flash_chat/ultilities/constrains.dart';
+import 'package:flash_chat/provider/auth.dart';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../components/messages.dart';
 
@@ -21,11 +24,7 @@ class _ChatPageState extends State<ChatPage> {
         title: const Text('Flash Chat'),
         actions: [
           IconButton(
-            onPressed: () async {
-              await FirebaseFirestore.instance.collection('chats').add({
-                'text': 'This is another test',
-              });
-            },
+            onPressed: () => context.read<AutheProvider>().signOut(context),
             icon: const Icon(Icons.logout_rounded),
           ),
         ],

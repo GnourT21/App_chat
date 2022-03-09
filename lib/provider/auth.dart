@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/pages/auth_page.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/chat_page.dart';
@@ -45,6 +46,13 @@ class AutheProvider with ChangeNotifier {
           email: _email,
           password: _password,
         );
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(_auth.currentUser!.uid)
+            .set({
+          'email': _email,
+          'username': _displayName,
+        });
       }
       Navigator.of(ctx).pushNamed(ChatPage.route);
     } on FirebaseAuthException catch (e) {
@@ -60,5 +68,10 @@ class AutheProvider with ChangeNotifier {
     } catch (e) {
       throw e.toString();
     }
+  }
+
+  void signOut(BuildContext ctx) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(ctx).pushNamed(AuthScreen.route);
   }
 }

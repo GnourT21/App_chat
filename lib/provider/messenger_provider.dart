@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 
 class MessengerProvider with ChangeNotifier {
   String? _mess;
-  String? _sender;
 
   String get mess => _mess!;
-  String get sender => _sender!;
 
   final fireBase = FirebaseFirestore.instance;
 
