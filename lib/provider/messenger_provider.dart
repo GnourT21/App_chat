@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 class MessengerProvider with ChangeNotifier {
   String? _mess;
-
   String get mess => _mess!;
 
-  final fireBase = FirebaseFirestore.instance;
+  final _fireBase = FirebaseFirestore.instance;
+  final _user = FirebaseAuth.instance.currentUser;
 
   void setMessage(String mess) {
     _mess = mess;
@@ -15,12 +15,10 @@ class MessengerProvider with ChangeNotifier {
   }
 
   void sendMessage() async {
-    final _user = FirebaseAuth.instance.currentUser;
-    await fireBase.collection('chats').add({
+    await _fireBase.collection('chats').add({
       'text': _mess,
       'createdAt': Timestamp.now(),
       'uid': _user!.uid,
-      'name': _user.email
     });
   }
 }

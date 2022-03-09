@@ -4,15 +4,10 @@ import 'package:flutter/material.dart';
 
 class MessageBubble extends StatelessWidget {
   const MessageBubble(
-      {Key? key,
-      required this.mess,
-      required this.name,
-      required this.isMe,
-      required this.userID})
+      {Key? key, required this.mess, required this.isMe, required this.userID})
       : super(key: key);
 
   final String mess;
-  final String name;
   final String userID;
   final bool isMe;
 
